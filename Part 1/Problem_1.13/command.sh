@@ -1,0 +1,1 @@
+sudo docker build . -t hello-backend && sudo docker run -p 8080:8080 hello-backend
