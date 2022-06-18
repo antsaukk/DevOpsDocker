@@ -1,0 +1,1 @@
+sudo docker run -d -it --name port -p 1234:8080 devopsdockeruh/simple-web-service server
