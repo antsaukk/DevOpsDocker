@@ -3,7 +3,7 @@ version: '3.8'
 services:
     redis:
       image: redis
-      container_name: redis
+      container_name: red
       restart: unless-stopped
       volumes:
         - rd:/usr/src/redis/files
@@ -23,7 +23,7 @@ services:
       container_name: backend
       build: ./backend
       environment:
-        - REDIS_HOST=redis
+        - REDIS_HOST=red
         - POSTGRES_HOST=postgres
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=postgres
