@@ -10,7 +10,7 @@ services:
       command: ["redis-server"]
 
     postgres:
-      image: postgres:13.2-alpine
+      image: postgres
       restart: unless-stopped
       environment:
         - POSTGRES_HOST=postgres
