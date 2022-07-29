@@ -3,19 +3,21 @@ version: '3.8'
 services:
     redis:
       image: redis
-      container_name: red
+      container_name: redis
       restart: unless-stopped
       volumes:
         - rd:/usr/src/redis/files
       command: ["redis-server"]
 
-    db:
+    postgres:
       image: postgres:13.2-alpine
       restart: unless-stopped
       environment:
+        - POSTGRES_HOST=postgres
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=postgres
-      container_name: db_redmine
+        - POSTGRES_DATABASE=postgres
+      container_name: postgres
       volumes:
         - database:/var/lib/postgresql/data
 
@@ -23,7 +25,7 @@ services:
       container_name: backend
       build: ./backend
       environment:
-        - REDIS_HOST=red
+        - REDIS_HOST=redis
         - POSTGRES_HOST=postgres
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=postgres
@@ -32,7 +34,7 @@ services:
         - 8080:8080
       depends_on:
         - redis
-        - db
+        - postgres
 
 volumes: 
   rd:
