@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+    frontend:
+      container_name: fe
+      build: ./frontend
+      ports:
+        - 3000:5000
+      depends_on:
+        - backend
+
+    backend:
+      container_name: be
+      build: ./backend
+      ports:
+        - 5000:5000
+      volumes:
+        - model:/src/model
+      depends_on:
+        - training
+
+    training:
+      container_name: tr
+      build: ./training
+      volumes:
+        - model:/src/model
+        - images:/src/imgs
+
+volumes: 
+  model:
+  images:
