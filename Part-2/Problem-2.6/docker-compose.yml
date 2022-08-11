@@ -7,6 +7,8 @@ services:
       restart: unless-stopped
       volumes:
         - rd:/usr/src/redis/files
+      ports:
+        - 6379:6379
       command: ["redis-server"]
 
     postgres:
@@ -36,6 +38,6 @@ services:
         - redis
         - postgres
 
-volumes: 
+volumes:
   rd:
   database:
